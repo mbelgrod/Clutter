@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click and Drag Images</title>
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;}
+    
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    .draggable {
+      position: absolute;
+      cursor: grab;
+    }
+
+    /* Add the following CSS rule to disable pointer events during dragging */
+    .dragging {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const images = [
+      'clutter-11.png',
+      'clutter-12.png',
+      'clutter-13.png',
+      'clutter-14.png',
+      'clutter-15.png',
+      'clutter-16.png',
+      'clutter-17.png',
+      'clutter-18.png',
+      'clutter-19.png',
+      'clutter-20.png',
+      'clutter-21.png',
+      'clutter-22.png',
+      'clutter-23.png',
+      'clutter-24.png',
+      'clutter-25.png',
+      'clutter-26.png',
+      'clutter-27.png',
+      'clutter-28.png',
+      'clutter-29.png',
+      'clutter-30.png',
+      'clutter-31.png',
+      'clutter-32.png',
+      'clutter-33.png',
+      'clutter-34.png',
+      'clutter-35.png',
+      'clutter-36.png',
+      'clutter-37.png',
+      'clutter-38.png',
+      'clutter-39.png',
+      'clutter-40.png',
+      'clutter-41.png',
+      'clutter-42.png',
+      'clutter-43.png',
+      'clutter-44.png',
+      'clutter-45.png',
+      'clutter-46.png',
+      'clutter-47.png',
+      'clutter-48.png',
+      'clutter-49.png',
+      'clutter-50.png',
+      'clutter-51.png',
+      'clutter-53.png',
+      'clutter-54.png',
+      'clutter-55.png',
+      'clutter-56.png',
+      'clutter-57.png',
+      'clutter-58.png',
+      'clutter-59.png',
+      'clutter-60.png',
+      'clutter-61.png',
+      'question.png'
+    ];
+
+    const scalePercentage = 0.20;
+
+    images.forEach((image, index) => {
+      const imgElement = document.createElement('img');
+      imgElement.src = image;
+      imgElement.classList.add('draggable');
+
+      // Generate random initial positions within the viewport
+      imgElement.style.left = `${Math.random() * (window.innerWidth - imgElement.width * scalePercentage)}px`;
+      imgElement.style.top = `${Math.random() * (window.innerHeight - imgElement.height * scalePercentage)}px`;
+
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      imgElement.addEventListener('load', function () {
+        // Set width and height based on the actual image size
+        imgElement.style.width = `${this.widthpx * scalePercentage}px`;
+        imgElement.style.height = `${this.height * scalePercentage}px`;
+      });
+
+      imgElement.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - imgElement.getBoundingClientRect().left;
+        offsetY = e.clientY - imgElement.getBoundingClientRect().top;
+        imgElement.style.cursor = 'grabbing';
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          imgElement.style.left = `${e.clientX - offsetX}px`;
+          imgElement.style.top = `${e.clientY - offsetY}px`;
+        }
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+        imgElement.style.cursor = 'grab';
+      });
+
+      document.body.appendChild(imgElement);
+    });
+  });
+</script>
+
+</body>
+</html>
